@@ -4,14 +4,16 @@ import jakarta.persistence.*;
 
 import java.util.List;
 
-@Entity(name = "Usuario")
-@Table(name = "usuario")
-public class Usuario {
+@Entity(name = "Motorista")
+@Table(name = "motorista")
+public class Motorista {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nome;
     private String email;
     private String telefone;
-    @OneToMany(mappedBy = "usuario")
+    @OneToOne @JoinColumn(name = "veiculo_id", referencedColumnName = "id", unique = true)
+    private Veiculo veiculo;
+    @OneToMany(mappedBy = "motorista")
     private List<Corrida> corridas;
 }
